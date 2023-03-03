@@ -1,6 +1,7 @@
 package ch06;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -9,23 +10,9 @@ import java.util.StringTokenizer;
 public class Q05 {
     String solution(int n, int[] arr) {
         String answer = "U";
-
-        for (int x = 0; x < n-1; x++) {
-            for (int y = 0; y < n - x - 1; y++) {
-                if (arr[y] > arr[y + 1]) {
-                    if (arr[y] == arr[y+1]) return "D";
-                    int tmp = arr[y];
-                    arr[y] = arr[y + 1];
-                    arr[y + 1] = tmp;
-                }
-            }
-        }
-
-        for (int x = 0; x < n - 1; x++) {
-            if (arr[x] == arr[x + 1]) {
-                answer = "D";
-                break;
-            }
+        Arrays.sort(arr);
+        for (int i = 0; i < n - 1; i++) {
+            if (arr[i] == arr[i+1]) answer = "D";
         }
         return answer;
     }
