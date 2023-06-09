@@ -10,25 +10,21 @@ public class Q04 {
     String solution(int s, int n, int[] arr) {
         String answer = "";
         int[] cache = new int[s];
-        for (int x : arr) {
-            int pos = -1;
-            for (int i = 0; i < s; i++) if (x == cache[i]) pos = i;
-            if (pos == -1) {
-                for (int i = s - 1; i >= 1; i--) {
-                    cache[i] = cache[i - 1];
-                }
-            } else {
-                for (int i = pos; i >= 1; i--) {
-                    cache[i] = cache[i - 1];
+        for (int x = 0; x < n; x++) {
+            int tmp = arr[x], y;
+            boolean hit = false;
+            for (y = 0; y < s; y++) {
+                if (cache[y] == tmp) {
+                    hit = true;
+                    break;
                 }
             }
-            cache[0] = x;
+            if (hit) for (int z = y; z >= 1; z--) cache[z] = cache[z - 1];
+            else for (int z = s - 1; z >= 1; z--) cache[z] = cache[z - 1];
+            cache[0] = tmp;
         }
 
-        for (int i = 0; i < s; i++) {
-            if (i < s - 1) answer += cache[i] + " ";
-            else answer += String.valueOf(cache[i]);
-        }
+        for (int x : cache) answer += x + " ";
 
         return answer;
     }

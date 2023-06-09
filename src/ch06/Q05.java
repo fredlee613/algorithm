@@ -10,9 +10,32 @@ import java.util.StringTokenizer;
 public class Q05 {
     String solution(int n, int[] arr) {
         String answer = "U";
-        Arrays.sort(arr);
-        for (int i = 0; i < n - 1; i++) {
-            if (arr[i] == arr[i+1]) answer = "D";
+//        Arrays.sort(arr);
+
+//        for (int x = 0; x < n; x++) {
+//            for (int y = 0; y < n - 1 - x; y++) {
+//                if (arr[y + 1] < arr[y]) {
+//                    int tmp = arr[y];
+//                    arr[y] = arr[y+1];
+//                    arr[y + 1] = tmp;
+//                }
+//            }
+//        }
+
+        for (int x = 1; x < n; x++) {
+            int tmp = arr[x], y;
+            for (y = x - 1; y >= 0; y--) {
+                if (arr[y] > tmp) arr[y + 1] = arr[y];
+                else break;
+            }
+            arr[y+1] = tmp;
+        }
+
+        for (int x = 0; x < n - 1; x++) {
+            if (arr[x + 1] == arr[x]) {
+                answer = "D";
+                break;
+            }
         }
         return answer;
     }
