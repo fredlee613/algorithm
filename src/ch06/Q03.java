@@ -12,16 +12,13 @@ public class Q03 {
         for (int x = 1; x < n; x++) {
             int tmp = arr[x], y;
             for (y = x - 1; y >= 0; y--) {
-                if (arr[y] > tmp) arr[y + 1] = arr[y];
+                if (arr[y] > tmp) arr[y + 1] = arr[y]; // tmp 보다 클 경우 한칸씩 뒤로
                 else break;
-            }
 
+            }
             arr[y + 1] = tmp;
         }
-        for (int i = 0; i < n; i++) {
-            if (i != n - 1) answer += arr[i] + " ";
-            else answer += arr[i];
-        }
+        for (int x : arr) answer += x + " ";
         return answer;
     }
     public static void main(String[] args) throws IOException {

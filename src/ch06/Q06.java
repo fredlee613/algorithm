@@ -2,7 +2,6 @@ package ch06;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 
 /**
@@ -11,7 +10,6 @@ import java.util.StringTokenizer;
 public class Q06 {
     String solution(int n, int[] arr) {
         String answer = "";
-        HashSet<Integer> set = new HashSet<>();
         int[] tmp = arr.clone();
         Arrays.sort(tmp);
 

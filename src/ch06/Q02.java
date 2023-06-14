@@ -9,18 +9,17 @@ import java.util.StringTokenizer;
 public class Q02 {
     String solution(int n, int[] arr) {
         String answer = "";
-        for (int x = 0; x < n - 1; x++) {
+        for (int x = 0; x < n; x++) {
             for (int y = 0; y < n - x - 1; y++) {
                 if (arr[y] > arr[y+1]) {
                     int tmp = arr[y];
-                    arr[y] = arr[y+1];
-                    arr[y+1] = tmp;
+                    arr[y] = arr[y + 1];
+                    arr[y + 1] = tmp;
                 }
             }
         }
-        for (int i = 0; i < n; i++) {
-            if (i != n - 1) answer += arr[i] + " ";
-            else answer += arr[i];
+        for (int x : arr) {
+            answer += x + " ";
         }
         return answer;
     }
