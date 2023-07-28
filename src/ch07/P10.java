@@ -1,0 +1,40 @@
+package ch07;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+/**
+ * 10. Tree 말단 노드까지의 가장 짧은 경로 (BFS)
+ */
+
+public class P10 {
+    Node root;
+
+    int BFS(Node root) {
+        int level = 0;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node currentQueue = queue.poll();
+                if (currentQueue.lt == null && currentQueue.rt == null) return level;
+                if(currentQueue.lt != null) queue.offer(currentQueue.lt);
+                if(currentQueue.rt != null) queue.offer(currentQueue.rt);
+            }
+            level++;
+        }
+        return level;
+    }
+
+    public static void main(String[] args) {
+        P10 tree = new P10();
+        tree.root = new Node(1);
+        tree.root.lt = new Node(2);
+        tree.root.rt = new Node(3);
+        tree.root.lt.lt = new Node(4);
+        tree.root.lt.rt = new Node(5);
+
+        System.out.print(tree.BFS(tree.root));
+    }
+}
