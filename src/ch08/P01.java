@@ -1,6 +1,7 @@
 package ch08;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -9,7 +10,8 @@ import java.util.StringTokenizer;
 public class P01 {
     static int[] arr, ch;
     static String answer = "NO";
-    static int n;
+    static int n, total;
+    static boolean flag = false;
 
     public static void main(String[] args) throws IOException {
         P01 main = new P01();
@@ -20,8 +22,9 @@ public class P01 {
         arr = new int[n + 1];
         ch = new int[n + 1];
         for (int i = 1; i <= n; i++) arr[i] = Integer.parseInt(st.nextToken());
-        main.DFS(1);
-
+        total = Arrays.stream(arr).sum();
+//        main.DFS(1);
+        main.DFS_answer(1, 0, arr);
         stdOut.write(answer);
         stdOut.flush();
 
@@ -32,17 +35,29 @@ public class P01 {
     void DFS(int L) {
         if (L == n) {
             int sum_checked = 0;
-            int sum_unchecked = 0;
             for (int i = 1; i <= n; i++) {
                 if (ch[i] == 1) sum_checked += arr[i];
-                else sum_unchecked += arr[i];
             }
-            if (sum_checked == sum_unchecked) answer = "YES";
+            if (sum_checked == total - sum_checked) answer = "YES";
         } else {
             ch[L] = 1;
             DFS(L + 1);
             ch[L] = 0;
             DFS(L + 1);
+        }
+    }
+
+    void DFS_answer(int L, int sum, int[] arr) {
+        if (flag) return;
+        if (sum > total / 2) return;
+        if (L == n + 1) {
+            if ((total - sum) == sum) {
+                answer = "YES";
+                flag = true;
+            }
+        } else {
+            DFS_answer(L + 1, sum + arr[L], arr);
+            DFS_answer(L + 1, sum, arr);
         }
     }
 }
