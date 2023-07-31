@@ -29,6 +29,15 @@ public class P03 {
         }
     }
 
+    void DFS_answer(int L, int sumOfPoints, int sumOfTime, int[] point, int[] time) {
+        if (sumOfTime > m) return;
+        if (L == n + 1) answer = Math.max(answer, sumOfPoints);
+        else {
+            DFS_answer(L + 1, sumOfPoints + point[L], sumOfTime + time[L], point, time);
+            DFS_answer(L + 1, sumOfPoints, sumOfTime, point, time);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         P03 main = new P03();
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -45,7 +54,8 @@ public class P03 {
             time[i] = Integer.parseInt(st.nextToken());
         }
 
-        main.DFS(1);
+//        main.DFS(1);
+        main.DFS_answer(1, 0, 0, point, time);
 
         stdOut.write(String.valueOf(answer));
         stdOut.flush();

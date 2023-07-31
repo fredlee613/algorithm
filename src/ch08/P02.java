@@ -23,7 +23,8 @@ public class P02 {
 
         for (int i = 1; i <= n; i++) arr[i] = Integer.parseInt(stdIn.readLine());
 
-        main.DFS(1);
+//        main.DFS(1);
+        main.DFS_answer(1, 0, arr);
 
         stdOut.write(String.valueOf(answer));
         stdOut.flush();
@@ -47,4 +48,13 @@ public class P02 {
         }
     }
 
+    void DFS_answer(int L, int sum, int[] arr) {
+        if (sum > c) return;
+        if (L == n + 1) {
+            answer = Math.max(sum, answer);
+        } else {
+            DFS_answer(L + 1, sum + arr[L], arr);
+            DFS_answer(L + 1, sum, arr);
+        }
+    }
 }
